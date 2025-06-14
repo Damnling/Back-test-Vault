@@ -1,23 +1,25 @@
-const StrategyComponent = require('../models/StrategyComponent');
+const StrategyComponent = require('../models/strategycomponent');
 
-exports.createStrategy = async (requestAnimationFrame, res) => {
-    try {
-        const strategy = new StrategyComponent(req.body);
-        await strategy.save();
-        res.jason({ status: 'success', strategy });
-    } catch (error) {
-        res.status(500).json({ status: 'error', message: error.message });
-
-    }
+// Create a new strategy
+exports.createStrategy = async (req, res) => {
+  try {
+    const strategyData = req.body;
+    // Optionally: generate unique id here if needed
+    const newStrategy = new StrategyComponent(strategyData);
+    await newStrategy.save();
+    res.status(201).json(newStrategy);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 };
 
+// Get all strategies
 exports.getAllStrategies = async (req, res) => {
-    try {
-        const strategies = await StrategyComponent.find({});
-        res.json(strategies);
-    } catch (error) {
-        res.status(500).json({ status: 'error', message: error.message });
-
-    }
+  try {
+    const strategies = await StrategyComponent.find();
+    res.json(strategies);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 

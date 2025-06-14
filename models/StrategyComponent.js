@@ -15,7 +15,9 @@ const strategyComponentSchema = new mongoose.Schema({
     market_conditions: [String],
     summary: String,
     embedding: [Number],
-});
+
+},  { timestamps: true });
+
 
 module.exports = mongoose.model('StrategyComponent', strategyComponentSchema);
 
