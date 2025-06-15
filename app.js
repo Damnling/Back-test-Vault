@@ -18,5 +18,17 @@ connectDB();
 app.use('/api/strategies', strategiesRouter);
 app.use('/api/search-strategies', searchStrategiesRouter);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something went wrong!' });
+  });
+
+
+
+// Health check route
+app.get('/api/health', (req, res) => res.send('OK'));
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

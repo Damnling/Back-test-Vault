@@ -1,4 +1,4 @@
-const StrategyComponent = require('../models/strategycomponent');
+const StrategyComponent = require('../models/StrategyComponent');
 
 // Create a new strategy
 exports.createStrategy = async (req, res) => {
@@ -22,4 +22,3 @@ exports.getAllStrategies = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
